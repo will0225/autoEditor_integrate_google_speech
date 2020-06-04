@@ -1,0 +1,180 @@
+{
+  "name": "digital-paper-edit-electron",
+  "productName": "autoEdit 3",
+  "version": "1.2.12",
+  "description": "Digital Paper Edit app",
+  "main": "src/electron-main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -rf build dist",
+    "start": "cross-env NODE_ENV=development electron .",
+    "start:dev": "cross-env NODE_ENV=development electron .",
+    "start:prod": "cross-env NODE_ENV=production electron .",
+    "build:m": "cross-env NODE_ENV=production electron-builder -m",
+    "build:w": "cross-env NODE_ENV=production electron-builder -w",
+    "build:l": "cross-env NODE_ENV=production electron-builder -l",
+    "build:mwl": "cross-env NODE_ENV=production electron-builder -mwl",
+    "build:mwl:publish:always": "electron-builder -mwl --x64 --ia32 --publish always",
+    "build:m:publish:always": "electron-builder -m --publish always",
+    "build:mw:publish:always": "electron-builder -mw --publish always",
+    "build": "npx cross-env NODE_ENV=production electron-builder -m"
+  },
+  "license": "MIT",
+  "author": "Pietro Passarelli CC0 2019",
+  "contributors": [
+    ""
+  ],
+  "bugs": {
+    "url": "https://github.com/pietrop/digital-paper-edit-electron/issues"
+  },
+  "homepage": "https://github.com/pietrop/digital-paper-edit-electron",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pietrop/digital-paper-edit-electron.git"
+  },
+  "build": {
+    "publish": {
+      "provider": "github",
+      "releaseType": "prerelease",
+      "vPrefixedTagName": false,
+      "owner": "pietrop",
+      "repo": "digital-paper-edit-electron"
+    },
+    "appId": "org.dpe.dpe-electron",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "asar": false,
+    "directories": {
+      "buildResources": "assets"
+    },
+    "files": [
+      "**/*",
+      "build/**",
+      "!config/",
+      "!assets/",
+      "!spec/",
+      "!project_page/",
+      "!vendor/",
+      "!docs/",
+      "!dist/",
+      "!icons/",
+      "node_modules/**/*",
+      "node_modules/ffmpeg-static-electron/bin/${os}/${arch}/ffmpeg",
+      "node_modules/ffmpeg-static-electron/index.js",
+      "node_modules/ffmpeg-static-electron/package.json",
+      "node_modules/ffprobe-static-electron/bin/${os}/${arch}/ffprobe",
+      "node_modules/ffprobe-static-electron/index.js",
+      "node_modules/ffprobe-static-electron/package.json"
+    ],
+    "copyright": "Pietro Passarelli CC0 2020",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "files": [
+        "!node_modules/ffmpeg-static-electron/bin/win${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/linux${/*}",
+        "!node_modules/ffprobe-static-electron/bin/win${/*}",
+        "!node_modules/ffprobe-static-electron/bin/linux${/*}"
+      ],
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "dmg": {
+      "background": "assets/background.png",
+      "icon": "assets/icon.icns",
+      "iconSize": 128,
+      "contents": [
+        {
+          "x": 448,
+          "y": 340,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 192,
+          "y": 340,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "files": [
+        "node_modules/ffmpeg-static-electron/bin/win/${arch}/ffmpeg",
+        "!node_modules/ffmpeg-static-electron/bin/win/ia32${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/linux${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/mac${/*}",
+        "node_modules/ffprobe-static-electron/bin/win/${arch}/ffprobe",
+        "!node_modules/ffprobe-static-electron/bin/win/ia32${/*}",
+        "!node_modules/ffprobe-static-electron/bin/linux${/*}",
+        "!node_modules/ffprobe-static-electron/bin/mac${/*}"
+      ]
+    },
+    "deb": {
+      "synopsis": "Digital Paper Edit Desktop App"
+    },
+    "linux": {
+      "category": "",
+      "packageCategory": "GNOME;GTK;VideoEditing;PaperEditing;Transcriptions",
+      "description": "Digital Paper Edit Desktop App",
+      "target": [
+        "AppImage"
+      ],
+      "maintainer": "Pietro Passarelli",
+      "files": [
+        "!node_modules/ffmpeg-static-electron/bin/linux/ia32${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/win${/*}",
+        "!node_modules/ffmpeg-static-electron/bin/mac${/*}",
+        "!node_modules/ffprobe-static-electron/bin/linux/ia32${/*}",
+        "!node_modules/ffprobe-static-electron/bin/win${/*}",
+        "!node_modules/ffprobe-static-electron/bin/mac${/*}"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "cross-env": "^5.2.0",
+    "electron": "^7.1.11",
+    "electron-builder": "^22.3.2",
+    "eslint": "^6.8.0",
+    "fibers": "^4.0.2",
+    "jest-resolve": "^24.9.0",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.13.1",
+    "npm": "^6.13.4",
+    "sass": "^1.24.0",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.4"
+  },
+  "dependencies": {
+    "@pietrop/assemblyai": "^2.0.1",
+    "@pietrop/digital-paper-edit-client": "^1.8.7",
+    "async": "^3.2.0",
+    "bootstrap-css-only": "^4.3.1",
+    "debug": "^4.1.1",
+    "deepspeech-node-wrapper": "^1.0.7",
+    "diskdb": "^0.1.17",
+    "electron-updater": "^4.1.2",
+    "ffmpeg-static-electron": "^2.0.1",
+    "ffprobe-static-electron": "^2.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "react": "^16.11.0",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.10.2",
+    "tmp": "^0.1.0"
+  }
+}
